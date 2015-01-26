@@ -6,17 +6,29 @@
 //  Copyright (c) 2015年 Ryan. All rights reserved.
 //
 
-#import "ViewController.h"
+#import "AttributorViewController.h"
+#import "TextStatsViewController.h"
 
-@interface ViewController ()
+@interface AttributorViewController ()
 @property (weak, nonatomic) IBOutlet UITextView *body;
 @property (weak, nonatomic) IBOutlet UILabel *headline;
 @property (weak, nonatomic) IBOutlet UIButton *outlineButton;
 
 @end
 
-@implementation ViewController
+@implementation AttributorViewController
 
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if ( [segue.identifier isEqualToString:@"Analyze Text"]){
+        if ([segue.destinationViewController isKindOfClass:[TextStatsViewController class]]) {
+            TextStatsViewController *tsvc = (TextStatsViewController *)segue.destinationViewController;
+            tsvc.textToAnalyze = self.body.textStorage;
+            
+        }
+    }
+}
 
 
 - (void)viewDidLoad {
